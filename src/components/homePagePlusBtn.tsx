@@ -1,6 +1,5 @@
 'use client'
 import { useGlobal } from '@/context/context'
-import Link from 'next/link'
 import React, { useState } from 'react'
 
 export default function HomePagePlusBtn() {
@@ -9,7 +8,7 @@ export default function HomePagePlusBtn() {
 
     const createListPopupHandler = () => {
         setCreateListPopup(!createListPopup)
-        setOpenPlus(!openPlus)
+        // setOpenPlus(!openPlus)
     }
 
     return (
