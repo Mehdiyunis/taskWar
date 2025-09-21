@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bungee } from "next/font/google";
 import "../styles/globals.css";
 import Header from "@/pages/layouts/header";
+import { GlobalProvider } from "@/context/context";
 
 const bungee = Bungee({
   subsets: ["latin"],
@@ -23,12 +24,19 @@ export default function RootLayout({
       <body
         className={`antialiased ${bungee.className}`}
       >
-        <div className="bg-[url(/willage.png)] bg-cover bg-center h-[100vh] relative after:absolute after:top-0 after:left-0 after:w-full after:h-full  after:backdrop-blur-xs z-0 after:-z-10 ">
-          <Header />
-          <main>
-            {children}
-          </main>
-        </div>
+        <GlobalProvider>
+
+          {/* div for background */}
+          <div
+            className="bg-[url(/willage.png)] bg-cover bg-center h-[100vh] relative after:absolute after:top-0 after:left-0 after:w-full after:h-full  after:backdrop-blur-xs z-0 after:-z-10 ">
+
+            <Header />
+            <main>
+              {children}
+            </main>
+          </div>
+
+        </GlobalProvider>
       </body>
     </html>
   );

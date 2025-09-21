@@ -1,9 +1,16 @@
 'use client'
+import { useGlobal } from '@/context/context'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
 export default function HomePagePlusBtn() {
     const [openPlus, setOpenPlus] = useState(false)
+    const { createListPopup, setCreateListPopup } = useGlobal()
+
+    const createListPopupHandler = () => {
+        setCreateListPopup(!createListPopup)
+        setOpenPlus(!openPlus)
+    }
 
     return (
         <div className='relative'>
@@ -17,9 +24,9 @@ export default function HomePagePlusBtn() {
             {/* creating list */}
             {openPlus ? <ul
                 title='creating list'
-                className='absolute z-10 left-16 min-h-14 p-2 bg-[var(--fence)] rounded-sm flex flex-col justify-center'>
+                className='absolute z-10 left-16 min-h-14 p-2 bg-[var(--firstColor)] rounded-sm flex flex-col justify-center'>
                 <li className='text-[var(--secondColor)]'>
-                    <Link href={"#"}>Create List</Link>
+                    <button onClick={createListPopupHandler}>Create List</button>
                 </li>
             </ul>
                 : ""
