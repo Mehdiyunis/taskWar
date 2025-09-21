@@ -1,0 +1,48 @@
+:root {
+    --fence: #f45364;
+    --roof: #ffec72;
+    --firstColor: #ffdd00;
+    --secondColor: #14005f;
+    --thirdColor: #99bad2;
+    /* --thirdColor: #0000002e; */
+}
+
+section {
+    padding: 0 17px;
+}
+
+/* global container media */
+.custom-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media (min-width: 576px) {
+    .custom-container {
+        width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .custom-container {
+        width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .custom-container {
+        width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .custom-container {
+        width: 1140px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .custom-container {
+        width: 1320px;
+    }
+}
