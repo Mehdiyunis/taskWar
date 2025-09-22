@@ -1,10 +1,21 @@
 'use client'
 
 import { useGlobal } from '@/context/context'
-import React from 'react'
+import React, { useState } from 'react'
+
 
 export default function HomeCreateListPopup() {
     const { createListPopup, setCreateListPopup } = useGlobal()
+    const [listName, setListName] = useState("")
+    const [listNameErr, setListNameErr] = useState(false)
+    const inputChangeHandle = (e: string) => {
+        setListName(e)
+        setListNameErr(false)
+    }
+
+    const startHandle = () => {
+        listName ? setCreateListPopup(!createListPopup) : setListNameErr(true)
+    }
 
     return (<>
         {createListPopup ? <div className='fixed w-full h-full top-0 left-0 z-20 bg-[var(--curtain)]'>
@@ -20,12 +31,21 @@ export default function HomeCreateListPopup() {
                     <div className='flex flex-col gap-6'>
                         <h2 className='text-center text-2xl'>Create List</h2>
 
-                        <input
-                            type="text"
-                            placeholder='create list name'
-                            className='py-4 focus-visible:border-none focus-visible:outline-none'
-                        />
-                        <button className='inline-block m-auto text-xl transition-all drop-shadow-fuchsia-300 border-2 border-t-transparent border-l-transparent border-r-transparent border-b-[var(--secondColor)] hover:border-[var(--secondColor)]'>start</button>
+                        {/* input and empty error */}
+                        <div className='relative py-4'>
+                            <input
+                                onChange={(e) => inputChangeHandle(e.target.value)}
+                                type="text"
+                                placeholder='create list name'
+                                className='focus-visible:border-none focus-visible:outline-none'
+                            />
+
+                            {listNameErr ? <span className='absolute text-xs bg-[var(--fence)] text-[var(--firstColor)] top-[calc(100%-16px)] left-0'>You can't keep it empty</span> : ""}
+                        </div>
+
+                        <button
+                            onClick={startHandle}
+                            className='inline-block m-auto text-xl transition-all drop-shadow-fuchsia-300 border-2 border-t-transparent border-l-transparent border-r-transparent border-b-[var(--secondColor)] hover:border-[var(--secondColor)]'>start</button>
                     </div>
                 </div>
             </div>

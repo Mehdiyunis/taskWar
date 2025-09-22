@@ -8,7 +8,7 @@ export default function HomePagePlusBtn() {
 
     const createListPopupHandler = () => {
         setCreateListPopup(!createListPopup)
-        // setOpenPlus(!openPlus)
+        setOpenPlus(!openPlus)
     }
 
     return (
