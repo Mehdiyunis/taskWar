@@ -1,24 +1,27 @@
 'use client'
 
-import { useGlobal } from "@/context/context"
+import { fetchLists } from "@/store/slices/todosListsSlice";
+import { AppDispatch, RootState } from "@/store/store";
 import Link from "next/link";
-
-type Todos = {
-    list_id: number;
-    list_title: string;
-    slug: string;
-};
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Lists() {
+    const dispatch = useDispatch<AppDispatch>()
+    const { lists, loading, error } = useSelector((state: RootState) => state.lists)
 
-    const { todosLists, todosListsLoading } = useGlobal()
+    useEffect(() => {
+        dispatch(fetchLists())
+    }, [dispatch])
+
+    if (error) return <p>Errorrrrrrr</p>
 
     return (
         <div className='h-full pl-16'>
             <div className='min-h-14 h-full border-2 border-[var(--firstColor)] flex'>
-                {todosListsLoading ? <p className="text-[var(--firstColor)] text-center py-3.5 w-full">Loading...</p>
+                {loading ? <p className="text-[var(--firstColor)] text-center py-3.5 w-full">Loading...</p>
                     :
-                    todosLists?.map((list: Todos) => (
+                    lists?.map((list) => (
                         <Link href={`/${list.slug}`}
                             className="w-1/3 p-3"
                             key={list.list_id}>

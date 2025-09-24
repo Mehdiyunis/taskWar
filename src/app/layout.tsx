@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Bungee } from "next/font/google";
 import "../styles/globals.css";
 import Header from "@/pages/layouts/header";
-import { store } from "@/store/store";
-import { Provider } from "react-redux";
+import { Providers } from "@/store/providers";
 
 const bungee = Bungee({
   subsets: ["latin"],
@@ -26,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`antialiased ${bungee.className}`}>
 
-        <Provider store={store}>
+        <Providers>
           {/* div for background */}
 
           <div className={style}>
@@ -40,8 +39,7 @@ export default function RootLayout({
             </main>
 
           </div>
-
-        </Provider>
+        </Providers>
       </body>
     </html>
   );

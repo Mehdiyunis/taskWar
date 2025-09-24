@@ -1,8 +1,8 @@
-import SlugSingleSec from '@/components/slugListPage/slugSingleSec'
-import React from 'react'
+// import SlugSingleSec from '@/components/slugListPage/slugSingleSec'
+// import React from 'react'
 
-export default function ListSlug() {
-    return (
-        <SlugSingleSec />
-    )
-}
+// export default function ListSlug() {
+//     return (
+//         <SlugSingleSec />
+//     )
+// }
