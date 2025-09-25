@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import todosListsReducer from './slices/todosListsSlice'
+import addListPopupReducer from './slices/addListPopupSlice'
+import todosReducer from './slices/todosSlice'
 
 export const store = configureStore({
     reducer: {
-        lists: todosListsReducer
+        lists: todosListsReducer,
+        addList: addListPopupReducer,
+        todos: todosReducer
     },
 })
 
