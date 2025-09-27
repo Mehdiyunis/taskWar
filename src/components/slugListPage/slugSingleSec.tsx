@@ -15,7 +15,6 @@ export default function SlugSingleSec() {
 
     useEffect(() => {
         dispatch(fetchTodos(param))
-        console.log(todos[0]?.todos)
     }, [dispatch])
 
     return (
@@ -24,25 +23,19 @@ export default function SlugSingleSec() {
                 {loading ? <p className='text-center text-[var(--firstColor)] pt-16'>
                     Loading...
                 </p> : statuses?.map((items, index) => {
-                    const times = ["Created", "Started", "Finished"]
                     return (
                         <div key={index} className="w-1/3 rounded-2xl h-full">
                             <h3 className="bg-[var(--firstColor)] rounded-2xl p-2.5 text-center text-2xl">{items}</h3>
                             <div className="p-2.5">
-                                {clearTodos?.filter(item => item.status.toLowerCase === items.toLowerCase)?.map(item => {
-                                    console.log(item, items)
-                                    const s = "will"
+                                {clearTodos?.map(item => {
+
                                     const { todo_id, content, status, create_date, start_date, finish_date } = item;
-                                    return (
-                                        <div key={todo_id} className="mb-2.5 bg-[var(--firstColor)] rounded-xl flex flex-col p-2">
+                                    return item.status.toLowerCase() === items.toLowerCase() ? (
+                                        <div key={todo_id} data-id={todo_id} className="mb-2.5 bg-[var(--firstColor)] rounded-xl flex flex-col p-2">
                                             <h4 className="px-2 text-xl text-[var(--secondColor)]">{content}</h4>
-                                            <div className="px-2 flex text-[var(--secondText)]">
-                                                <span>{times[index]}:</span>
-                                                <span>{finish_date || start_date || create_date}</span>
-                                            </div>
-                                            <span>{status}</span>
+                                            <span>+</span>
                                         </div>
-                                    )
+                                    ) : ""
                                 })
                                 }
                             </div>

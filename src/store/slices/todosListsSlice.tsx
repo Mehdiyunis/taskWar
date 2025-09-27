@@ -24,6 +24,11 @@ export const fetchLists = createAsyncThunk("lists/fetchLists", async () => {
     return (await res.json()) as Lists[];
 });
 
+// export const postLists = createAsyncThunk("lists/fetchLists", async () => {
+//     const res = await fetch("https://taskwar.vercel.app/todoslists");
+//     return (await res.json()) as Lists[];
+// });
+
 const listsSlice = createSlice({
     name: "lists",
     initialState,
