@@ -6,7 +6,7 @@ export default function SingleSec() {
 
     return (
         <section>
-            <div className='custom-container py-4 h-full'>
+            <div className="custom-container py-4 h-full">
                 <HomePagePlusBtn />
                 <HomeCreateListPopup />
                 <Lists />

@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { fetchLists } from "@/store/slices/todosListsSlice";
 import { AppDispatch, RootState } from "@/store/store";
@@ -18,8 +18,8 @@ export default function Lists() {
     if (errorAddList) return <p>{errorAddList}</p>
 
     return (
-        <div className='h-full pl-16'>
-            <div className='min-h-14 h-full border-2 border-[var(--firstColor)] flex'>
+        <div className="h-full pl-16">
+            <div className="min-h-14 h-full border-2 border-[var(--firstColor)] flex">
                 {loadingList ? <p className="text-[var(--firstColor)] text-center py-3.5 w-full">Loading...</p>
                     :
                     lists?.map((list) => (

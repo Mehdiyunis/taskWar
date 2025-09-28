@@ -8,8 +8,9 @@ import { useDispatch, useSelector } from "react-redux"
 export default function SlugSingleSec() {
     const { todos, loading, error } = useSelector((state: RootState) => state.todos)
     const dispatch = useDispatch<AppDispatch>()
-    const params: any = useParams()
-    const param: any = params.slug
+
+    const params = useParams();
+    const param = params?.slug as string
     const clearTodos = todos[0]?.todos
     const statuses = ["Will", "Doing", "Did"]
 
@@ -19,8 +20,8 @@ export default function SlugSingleSec() {
 
     return (
         <section>
-            <div className='custom-container flex gap-3 pt-4'>
-                {loading ? <p className='text-center text-[var(--firstColor)] pt-16'>
+            <div className="custom-container flex gap-3 pt-4">
+                {loading ? <p className="text-center text-[var(--firstColor)] pt-16">
                     Loading...
                 </p> : statuses?.map((items, index) => {
                     return (
@@ -29,7 +30,7 @@ export default function SlugSingleSec() {
                             <div className="p-2.5">
                                 {clearTodos?.map(item => {
 
-                                    const { todo_id, content, status, create_date, start_date, finish_date } = item;
+                                    const { todo_id, content } = item;
                                     return item.status.toLowerCase() === items.toLowerCase() ? (
                                         <div key={todo_id} data-id={todo_id} className="mb-2.5 bg-[var(--firstColor)] rounded-xl flex flex-col p-2">
                                             <h4 className="px-2 text-xl text-[var(--secondColor)]">{content}</h4>

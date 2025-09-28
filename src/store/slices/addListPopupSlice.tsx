@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit"
+import type { PayloadAction } from "@reduxjs/toolkit"
 
 export interface OpenPopup {
   value: boolean
@@ -10,7 +10,7 @@ const initialState: OpenPopup = {
 }
 
 export const addListPopupSlice = createSlice({
-  name: 'openPopup',
+  name: "openPopup",
   initialState,
   reducers: {
     changePopupStatus: (state, action: PayloadAction<boolean>) => {
