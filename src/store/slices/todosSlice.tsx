@@ -33,6 +33,29 @@ export const fetchTodos = createAsyncThunk("todos/fetchTodos", async (slug: stri
     return (await res.json()) as Todos[];
 });
 
+export const addTodo = createAsyncThunk("todo/addTodo", async () => {
+    const res = await fetch("https://taskwar.vercel.app/todos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            list_id: 2,
+            slug: "future-plan",
+            todos: [
+                {
+                    todo_id: 1,
+                    content: "Buy moto",
+                    status: "will",
+                    create_date: "2020-09-11T00:00",
+                    start_date: "",
+                    finish_date: ""
+                }
+            ]
+        }),
+    });
+    return await res.json();
+}
+);
+
 const todosSlice = createSlice({
     name: "todos",
     initialState,
@@ -47,6 +70,18 @@ const todosSlice = createSlice({
                 state.todos = action.payload;
             })
             .addCase(fetchTodos.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || "Xəta baş verdi";
+            });
+        builder
+            .addCase(addTodo.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(addTodo.fulfilled, (state, action) => {
+                state.loading = false;
+                state.todos.push(action.payload)
+            })
+            .addCase(addTodo.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || "Xəta baş verdi";
             });

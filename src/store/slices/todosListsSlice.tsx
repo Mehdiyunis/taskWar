@@ -29,12 +29,12 @@ export const fetchLists = createAsyncThunk("lists/fetchLists", async () => {
 });
 
 // yeni list yarat post api
-export const addTodoList = createAsyncThunk("todos/addTodo", async () => {
+export const addTodoList = createAsyncThunk("list/addList", async () => {
     const res = await fetch("https://taskwar.vercel.app/todoslists", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            list_id: Date.now,
+            list_id: Date.now(),
             list_title: "qaqa",
             slug: "qaqaq",
         }),
@@ -55,12 +55,12 @@ const listsSlice = createSlice({
             .addCase(fetchLists.fulfilled, (state, action) => {
                 state.loadingList = false;
                 state.lists = action.payload;
-                console.log(action.payload)
+                // console.log(action.payload)
             })
             .addCase(fetchLists.rejected, (state, action) => {
                 state.loadingList = false;
                 state.errorList = action.error.message || "Xəta baş verdi";
-                console.log(action.error)
+                // console.log(action.error)
             });
         builder
             .addCase(addTodoList.pending, (state) => {
@@ -68,12 +68,12 @@ const listsSlice = createSlice({
             })
             .addCase(addTodoList.fulfilled, (state, action) => {
                 state.loadingAddList = false;
-                console.log(action.payload)
+                // console.log(action.payload)
                 state.lists.push(action.payload);
             })
             .addCase(addTodoList.rejected, (state, action) => {
                 state.loadingAddList = false;
-                console.log(action.error);
+                // console.log(action.error);
             });
     },
 });

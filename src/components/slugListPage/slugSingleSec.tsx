@@ -1,5 +1,5 @@
 'use client'
-import { fetchTodos } from "@/store/slices/todosSlice"
+import { addTodo, fetchTodos } from "@/store/slices/todosSlice"
 import { AppDispatch, RootState } from "@/store/store"
 import { useParams } from "next/navigation"
 import { useEffect } from "react"
@@ -13,6 +13,10 @@ export default function SlugSingleSec() {
     const param = params?.slug as string
     const clearTodos = todos[0]?.todos
     const statuses = ["Will", "Doing", "Did"]
+
+    const addTodoFunc = () => {
+        dispatch(addTodo())
+    }
 
     useEffect(() => {
         dispatch(fetchTodos(param))
@@ -40,9 +44,12 @@ export default function SlugSingleSec() {
                                 })
                                 }
                             </div>
+
+
                         </div>
                     )
                 })}
+                <button onClick={addTodoFunc}>addddddddd</button>
             </div>
         </section>
     )
