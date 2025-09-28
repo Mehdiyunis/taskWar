@@ -43,15 +43,17 @@ export default function HomeCreateListPopup() {
 
 
     const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" && popupStatus) {
+            console.log(popupStatus)
             startHandle()
         } else if (e.key === "w") {
             console.log("Wilma")
         }
     };
 
-    window?.addEventListener("keydown", handleKeyDown)
-
+    if (typeof window !== "undefined") {
+        window?.addEventListener("keydown", handleKeyDown)
+    }
 
     return (<>
         {popupStatus ? <div className="fixed w-full h-full top-0 left-0 z-20 bg-[var(--curtain)]">
