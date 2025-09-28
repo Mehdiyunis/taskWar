@@ -1,16 +1,30 @@
 'use client'
 
 import { changePopupStatus } from '@/store/slices/addListPopupSlice'
-import { RootState } from '@/store/store'
-import React, { useState } from 'react'
+import { addTodoList, fetchLists } from '@/store/slices/todosListsSlice'
+import { AppDispatch, RootState } from '@/store/store'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 
+
 export default function HomeCreateListPopup() {
+    type newTodoList = { list_id: number; list_title: string; slug: string; }
+
     const [listName, setListName] = useState("")
     const [listNameErr, setListNameErr] = useState(false)
     const popupStatus = useSelector((state: RootState) => state.addList.value)
-    const dispatch = useDispatch()
+
+    const dispatch = useDispatch<AppDispatch>()
+
+    // const { lists } = useSelector((state: RootState) => state.lists)
+    // const ids = lists.map(i => i.list_id);
+    // const maxId = Math.max(...ids) + 1;
+    // const newTodoList = {
+    //     list_id: maxId,
+    //     list_title: listName,
+    //     slug: listName.replace(/\s/g, "-")
+    // }
 
     const inputChangeHandle = (e: string) => {
         setListName(e)
@@ -18,8 +32,27 @@ export default function HomeCreateListPopup() {
     }
 
     const startHandle = () => {
-        listName ? dispatch(changePopupStatus(!popupStatus)) : setListNameErr(true)
+        listName ? createList() : setListNameErr(true)
     }
+
+    const createList = () => {
+        // console.log(newTodoList)
+        setListNameErr(false)
+        dispatch(changePopupStatus(!popupStatus))
+        dispatch(addTodoList());
+    }
+
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Enter") {
+            startHandle()
+        } else if (e.key === "w") {
+            console.log("Wilma")
+        }
+    };
+
+    window?.addEventListener("keydown", handleKeyDown)
+
 
     return (<>
         {popupStatus ? <div className='fixed w-full h-full top-0 left-0 z-20 bg-[var(--curtain)]'>
